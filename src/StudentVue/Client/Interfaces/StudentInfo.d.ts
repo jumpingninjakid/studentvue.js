@@ -101,7 +101,7 @@ export declare interface StudentInfo {
    * A list of contacts in case of emergency
    * @type {EmergencyContact[]}
    */
-  emergencyContacts: EmergencyContact[];
+  //emergencyContacts: EmergencyContact[];
 
   /**
    * The student's physician
@@ -132,7 +132,7 @@ export declare interface StudentInfo {
    * Additional information about the student such as transportation information
    * @type {AdditionalInfo[]}
    */
-  additionalInfo: AdditionalInfo[];
+  //additionalInfo: AdditionalInfo[];
 }
 
 export declare interface AdditionalInfo {

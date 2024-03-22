@@ -44,9 +44,9 @@ export default class Client extends soap.Client {
   public validateCredentials(): Promise<void> {
     return new Promise((res, rej) => {
       super
-        .processRequest<ParsedRequestError>({ methodName: 'login test', validateErrors: false })
+        .processRequest<ParsedRequestError>({ methodName: 'login', validateErrors: false })
         .then((response) => {
-          if (response.RT_ERROR[0]['@_ERROR_MESSAGE'][0] === 'login test is not a valid method.') res();
+          if (response.RT_ERROR[0]['@_ERROR_MESSAGE'][0] === 'login test is not a valid method.' || response.RT_ERROR[0]['@_ERROR_MESSAGE'][0].includes("A critical error has occurred.")) res();
           else rej(new RequestException(response));
         })
         .catch(rej);
@@ -562,18 +562,18 @@ export default class Client extends soap.Client {
             orgYearGu: optional(xmlObjectData.StudentInfo[0].OrgYearGU),
             phone: optional(xmlObjectData.StudentInfo[0].Phone),
             email: optional(xmlObjectData.StudentInfo[0].EMail),
-            emergencyContacts: xmlObjectData.StudentInfo[0].EmergencyContacts && xmlObjectData.StudentInfo[0].EmergencyContacts[0]
-              ? xmlObjectData.StudentInfo[0].EmergencyContacts[0].EmergencyContact.map((contact) => ({
-                  name: optional(contact['@_Name']),
-                  phone: {
-                    home: optional(contact['@_HomePhone']),
-                    mobile: optional(contact['@_MobilePhone']),
-                    other: optional(contact['@_OtherPhone']),
-                    work: optional(contact['@_WorkPhone']),
-                  },
-                  relationship: optional(contact['@_Relationship']),
-                }))
-              : [],
+            // emergencyContacts: xmlObjectData.StudentInfo[0].EmergencyContacts && xmlObjectData.StudentInfo[0].EmergencyContacts[0]
+            //   ? xmlObjectData.StudentInfo[0].EmergencyContacts[0].EmergencyContact.map((contact) => ({
+            //       name: optional(contact['@_Name']),
+            //       phone: {
+            //         home: optional(contact['@_HomePhone']),
+            //         mobile: optional(contact['@_MobilePhone']),
+            //         other: optional(contact['@_OtherPhone']),
+            //         work: optional(contact['@_WorkPhone']),
+            //       },
+            //       relationship: optional(contact['@_Relationship']),
+            //     }))
+            //   : [],
             gender: optional(xmlObjectData.StudentInfo[0].Gender),
             grade: optional(xmlObjectData.StudentInfo[0].Grade),
             lockerInfoRecords: optional(xmlObjectData.StudentInfo[0].LockerInfoRecords),
@@ -584,22 +584,22 @@ export default class Client extends soap.Client {
               name: optional(xmlObjectData.StudentInfo[0].HomeRoomTch),
               staffGu: optional(xmlObjectData.StudentInfo[0].HomeRoomTchStaffGU),
             },
-            additionalInfo: xmlObjectData.StudentInfo[0].UserDefinedGroupBoxes[0].UserDefinedGroupBox
-              ? (xmlObjectData.StudentInfo[0].UserDefinedGroupBoxes[0].UserDefinedGroupBox.map((definedBox) => ({
-                  id: optional(definedBox['@_GroupBoxID']), // string | undefined
-                  type: definedBox['@_GroupBoxLabel'][0], // string
-                  vcId: optional(definedBox['@_VCID']), // string | undefined
-                  items: definedBox.UserDefinedItems[0].UserDefinedItem.map((item) => ({
-                    source: {
-                      element: item['@_SourceElement'][0],
-                      object: item['@_SourceObject'][0],
-                    },
-                    vcId: item['@_VCID'][0],
-                    value: item['@_Value'][0],
-                    type: item['@_ItemType'][0],
-                  })) as AdditionalInfoItem[],
-                })) as AdditionalInfo[])
-              : [],
+            // additionalInfo: xmlObjectData.StudentInfo[0].UserDefinedGroupBoxes[0].UserDefinedGroupBox
+            //   ? (xmlObjectData.StudentInfo[0].UserDefinedGroupBoxes[0].UserDefinedGroupBox.map((definedBox) => ({
+            //       id: optional(definedBox['@_GroupBoxID']), // string | undefined
+            //       type: definedBox['@_GroupBoxLabel'][0], // string
+            //       vcId: optional(definedBox['@_VCID']), // string | undefined
+            //       items: definedBox.UserDefinedItems[0].UserDefinedItem.map((item) => ({
+            //         source: {
+            //           element: item['@_SourceElement'][0],
+            //           object: item['@_SourceObject'][0],
+            //         },
+            //         vcId: item['@_VCID'][0],
+            //         value: item['@_Value'][0],
+            //         type: item['@_ItemType'][0],
+            //       })) as AdditionalInfoItem[],
+            //     })) as AdditionalInfo[])
+            //   : [],
           } as StudentInfo);
         })
         .catch(rej);

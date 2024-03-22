@@ -1,21 +1,6 @@
 export declare interface MessageXMLObject {
   PXPMessagesData: [
     {
-      SynergyMailMessageListingByStudents: [
-        {
-          SynergyMailMessageListingByStudent: [
-            {
-              SynergyMailMessageListings: [
-                {
-                  SynergyMailMessageListing: [
-                    
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
       MessageListings: [
         {
           MessageListing: {

@@ -572,21 +572,6 @@ declare module 'studentvue/StudentVue/Message/Message.xml' {
     export interface MessageXMLObject {
         PXPMessagesData: [
             {
-                SynergyMailMessageListingByStudents: [
-                    {
-                        SynergyMailMessageListingByStudent: [
-                            {
-                                SynergyMailMessageListings: [
-                                    {
-                                        SynergyMailMessageListing: [
-    
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
                 MessageListings: [
                     {
                         MessageListing: {
@@ -1589,7 +1574,7 @@ declare module 'studentvue/StudentVue/Client/Interfaces/StudentInfo' {
             * A list of contacts in case of emergency
             * @type {EmergencyContact[]}
             */
-        emergencyContacts: EmergencyContact[];
+        //emergencyContacts: EmergencyContact[];
     
         /**
             * The student's physician
@@ -1620,7 +1605,7 @@ declare module 'studentvue/StudentVue/Client/Interfaces/StudentInfo' {
             * Additional information about the student such as transportation information
             * @type {AdditionalInfo[]}
             */
-        additionalInfo: AdditionalInfo[];
+        //additionalInfo: AdditionalInfo[];
     }
     
     export interface AdditionalInfo {
