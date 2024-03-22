@@ -495,9 +495,9 @@ export default class Client extends soap.Client {
         )
         .then((xmlObject) => {
           res(
-            xmlObject.PXPMessagesData[0].MessageListings[0].MessageListing.map(
+            xmlObject.PXPMessagesData[0].MessageListings[0].MessageListing ? xmlObject.PXPMessagesData[0].MessageListings[0].MessageListing.map(
               (message) => new Message(message, super.credentials, this.hostUrl)
-            )
+            ) : []
           );
         })
         .catch(rej);
@@ -520,6 +520,7 @@ export default class Client extends soap.Client {
           paramStr: { childIntId: 0 },
         })
         .then((xmlObjectData) => {
+          //await console.log(xmlObjectData.StudentInfo[0])
           res({
             student: {
               name: xmlObjectData.StudentInfo[0].FormattedName[0],
@@ -561,7 +562,7 @@ export default class Client extends soap.Client {
             orgYearGu: optional(xmlObjectData.StudentInfo[0].OrgYearGU),
             phone: optional(xmlObjectData.StudentInfo[0].Phone),
             email: optional(xmlObjectData.StudentInfo[0].EMail),
-            emergencyContacts: xmlObjectData.StudentInfo[0].EmergencyContacts
+            emergencyContacts: xmlObjectData.StudentInfo[0].EmergencyContacts && xmlObjectData.StudentInfo[0].EmergencyContacts[0]
               ? xmlObjectData.StudentInfo[0].EmergencyContacts[0].EmergencyContact.map((contact) => ({
                   name: optional(contact['@_Name']),
                   phone: {

@@ -572,6 +572,21 @@ declare module 'studentvue/StudentVue/Message/Message.xml' {
     export interface MessageXMLObject {
         PXPMessagesData: [
             {
+                SynergyMailMessageListingByStudents: [
+                    {
+                        SynergyMailMessageListingByStudent: [
+                            {
+                                SynergyMailMessageListings: [
+                                    {
+                                        SynergyMailMessageListing: [
+    
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
                 MessageListings: [
                     {
                         MessageListing: {
