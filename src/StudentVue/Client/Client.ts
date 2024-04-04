@@ -46,6 +46,7 @@ export default class Client extends soap.Client {
       super
         .processRequest<ParsedRequestError>({ methodName: 'login test', validateErrors: false })
         .then((response) => {
+          res();
           if (response.RT_ERROR[0]['@_ERROR_MESSAGE'][0] === 'login test is not a valid method.' || response.RT_ERROR[0]['@_ERROR_MESSAGE'][0].includes("A critical error has occurred.")) res();
           else rej(new RequestException(response));
         })
@@ -519,8 +520,8 @@ export default class Client extends soap.Client {
           methodName: 'StudentInfo',
           paramStr: { childIntId: 0 },
         })
-        .then((xmlObjectData) => {
-          //await console.log(xmlObjectData.StudentInfo[0])
+        .then(async (xmlObjectData) => {
+          await console.log(xmlObjectData);
           res({
             student: {
               name: xmlObjectData.StudentInfo[0].FormattedName[0],

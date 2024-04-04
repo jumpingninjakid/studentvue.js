@@ -57,7 +57,7 @@ jest
 	.mockImplementation((districtUrl, credentials) => {
 		const host = new URL(districtUrl).host;
 
-		const endpoint: string = `https://${host}/Service/PXPCommunication.asmx`;
+		const endpoint: string = `https://${host}/service/PXP2Communication.asmx`;
 		const client = new Client(
 			{
 				username: credentials.username,
